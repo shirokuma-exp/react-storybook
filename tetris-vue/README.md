@@ -16,6 +16,8 @@ npm install vue-router@4
 
 npm install -D eslint-plugin-vue @vue/eslint-config-typescript
 
+npm install sass --save-dev
+
 ## 起動
 
 npm run dev
