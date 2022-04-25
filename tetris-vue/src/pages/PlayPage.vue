@@ -1,44 +1,4 @@
 <script lang="ts" setup>
-const tetrominos = [
-  [
-    // 0: blank
-    [0],
-  ],
-  [
-    // 1: I-tetromino(lightBlue)
-    [1, 1, 1, 1],
-  ],
-  [
-    // 2: O-tetromino(yellow)
-    [2, 2],
-    [2, 2],
-  ],
-  [
-    // 3: S-tetromino(green)
-    [0, 3, 3],
-    [3, 3, 0],
-  ],
-  [
-    // 4: Z-tetromino(red)
-    [4, 4, 0],
-    [0, 4, 4],
-  ],
-  [
-    // 5: J-tetromino(blue)
-    [0, 0, 5],
-    [5, 5, 5],
-  ],
-  [
-    // 6: L-tetromino(orange)
-    [6, 0, 0],
-    [6, 6, 6],
-  ],
-  [
-    // 7: T-tetrimino(purple)
-    [0, 7, 0],
-    [7, 7, 7],
-  ]
-];
 
 
 // 縦20行
@@ -66,6 +26,30 @@ field[1][0] = 1;
 field[2][0] = 1;
 field[3][0] = 1;
 
+const classBlockColor = (xIndex: number, yIndex: number): string => {
+  const type = field[yIndex][xIndex];
+  if (type > 0) {
+    switch (type) {
+      case 1:
+        return "block-i";
+      case 2:
+        return "block-o";
+      case 3:
+        return "block-s";
+      case 4:
+        return "block-z";
+      case 5:
+        return "block-j";
+      case 6:
+        return "block-l";
+      case 7:
+        return "block-t";
+      default:
+        return "";
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -83,8 +67,8 @@ field[3][0] = 1;
             class="block"
             v-for="(column, xIndex) in row"
             :key="() => `${xIndex}${yIndex}`"
+            v-bind:class="classBlockColor(xIndex, yIndex)"
           >
-            {{ column }}
           </td>
         </tr>
       </table>
@@ -92,7 +76,7 @@ field[3][0] = 1;
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   display: flex;
   justify-content: center;
@@ -108,5 +92,27 @@ field[3][0] = 1;
   width: 1em;
   height: 1em;
   border: 0.1em solid #95a5a6;
+
+  &-i {
+    background-color: #3498db;
+  }
+  &-o {
+    background-color: #f1c40f;
+  }
+  &-t {
+    background-color: #9b59b6;
+  }
+  &-j {
+    background-color: #1e3799;
+  }
+  &-l {
+    background-color: #e67e22;
+  }
+  &-s {
+    background-color: #2ecc71;
+  }
+  &-z {
+    background-color: #e74c3c;
+  }
 }
 </style>
